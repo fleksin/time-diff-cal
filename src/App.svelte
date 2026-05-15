@@ -39,9 +39,11 @@
     return `${h} 小时 ${m} 分钟`;
   }
 
-  let startTime = $state("09:00");
+  let initTime = new Date().getHours() + ':' + new Date().getMinutes();
+
+  let startTime = $state(initTime);
   let durationMins = $state(120);
-  let endTime = $state("11:00");
+  let endTime = $state(calcEnd(startTime, durationMins));
   let endManual = $state(false);
 
   let crossesMidnight = $derived.by(() => {
