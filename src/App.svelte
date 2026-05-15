@@ -18,7 +18,8 @@
   function calcEnd(start: string, addMins: number): string {
     const t = parseT(start);
     if (!t) return "";
-    const total = ((t.h * 60 + t.m + addMins) % (24 * 60) + 24 * 60) % (24 * 60);
+    const total =
+      (((t.h * 60 + t.m + addMins) % (24 * 60)) + 24 * 60) % (24 * 60);
     return `${pad(Math.floor(total / 60))}:${pad(total % 60)}`;
   }
 
@@ -40,8 +41,8 @@
   }
 
   let min = new Date().getMinutes().toString();
-  min = min.length < 2 ? '0' + min: min;
-  let initTime = new Date().getHours() + ':' + min;
+  min = min.length < 2 ? "0" + min : min;
+  let initTime = new Date().getHours() + ":" + min;
 
   let startTime = $state(initTime);
   let durationMins = $state(120);
@@ -88,25 +89,33 @@
   ];
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col items-center justify-start py-8 px-4">
+<div
+  class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col items-center justify-start py-8 px-4"
+>
   <div class="w-full max-w-sm">
-
     <!-- Header -->
     <div class="text-center mb-6">
-      <h1 class="text-3xl font-bold text-slate-800 tracking-tight">差时计算器</h1>
+      <h1 class="text-3xl font-bold text-slate-800 tracking-tight">
+        差时计算器
+      </h1>
       <p class="text-slate-400 text-sm mt-1">转动转盘 · 计算时间差</p>
     </div>
 
     <!-- Time inputs card -->
-    <div class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-5 mb-4">
+    <div
+      class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-5 mb-4"
+    >
       <div class="flex items-center gap-3">
-
         <!-- Start time -->
         <div class="flex-1">
-          <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">
+          <div
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5"
+          >
             开始时间
           </div>
-          <div class="rounded-xl border-2 border-blue-200 bg-blue-50 focus-within:border-blue-400 transition-colors">
+          <div
+            class="rounded-xl border-2 border-blue-200 bg-blue-50 focus-within:border-blue-400 transition-colors"
+          >
             <input
               type="time"
               value={startTime}
@@ -118,21 +127,30 @@
 
         <!-- Middle badge -->
         <div class="flex flex-col items-center pt-5 min-w-[52px]">
-         <!-- {#if crossesMidnight} -->
-            <p class="text-amber-500 text-[10px] mt-1 text-center {crossesMidnight? 'visible': 'invisible'}" >+1天</p>
+          <!-- {#if crossesMidnight} -->
+          <p
+            class="text-amber-500 text-[10px] mt-1 text-center {crossesMidnight
+              ? 'visible'
+              : 'invisible'}"
+          >
+            +1天
+          </p>
           <!-- {/if} -->
           <span class="text-slate-300 text-base leading-none">→</span>
-          <div class="mt-1.5 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
-            {fmtDuration(durationMins)}
-          </div>
         </div>
 
         <!-- End time -->
         <div class="flex-1">
-          <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5">
+          <div
+            class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1.5"
+          >
             结束时间
           </div>
-          <div class="rounded-xl border-2 transition-colors {endManual ? 'border-emerald-300 bg-emerald-50 focus-within:border-emerald-400' : 'border-slate-200 bg-slate-50 focus-within:border-blue-300'}">
+          <div
+            class="rounded-xl border-2 transition-colors {endManual
+              ? 'border-emerald-300 bg-emerald-50 focus-within:border-emerald-400'
+              : 'border-slate-200 bg-slate-50 focus-within:border-blue-300'}"
+          >
             <input
               type="time"
               value={endTime}
@@ -140,27 +158,37 @@
               class="w-full bg-transparent text-slate-800 text-lg font-semibold px-3 py-2.5 outline-none"
             />
           </div>
-         
         </div>
-
+      </div>
+      <div
+        class="mt-2.5 bg-blue-600 text-white text-center text-[40px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap"
+      >
+        {fmtDuration(durationMins)}
       </div>
     </div>
 
     <!-- Dial card -->
-    <div class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-5 mb-4">
-      <div class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3 text-center">
+    <div
+      class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-5 mb-4"
+    >
+      <div
+        class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-3 text-center"
+      >
         时长转盘
       </div>
       <DialKnob value={durationMins} max={2880} onchange={setDuration} />
     </div>
 
     <!-- Presets -->
-    <div class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-4 mb-4">
+    <div
+      class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-4 mb-4"
+    >
       <div class="flex flex-wrap gap-2 justify-center">
         {#each PRESETS as p}
           <button
             onclick={() => setDuration(p.mins)}
-            class="text-xs px-3 py-1.5 rounded-lg border font-medium transition-all {durationMins === p.mins
+            class="text-xs px-3 py-1.5 rounded-lg border font-medium transition-all {durationMins ===
+            p.mins
               ? 'bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-200'
               : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50'}"
           >
@@ -171,17 +199,27 @@
     </div>
 
     <!-- Result summary -->
-    <div class="bg-blue-600 rounded-2xl p-5 text-white shadow-lg shadow-blue-300/40">
+    <div
+      class="bg-blue-600 rounded-2xl p-5 text-white shadow-lg shadow-blue-300/40"
+    >
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-blue-200 text-[10px] font-semibold uppercase tracking-widest mb-1">计算结果</p>
+          <p
+            class="text-blue-200 text-[10px] font-semibold uppercase tracking-widest mb-1"
+          >
+            计算结果
+          </p>
           <p class="text-2xl font-bold">{fmtDuration(durationMins)}</p>
           <p class="text-blue-200 text-sm mt-0.5">
             {startTime} → {endTime}{crossesMidnight ? "（次日）" : ""}
           </p>
         </div>
         <div class="text-right">
-          <p class="text-blue-200 text-[10px] font-semibold uppercase tracking-widest mb-1">合计分钟</p>
+          <p
+            class="text-blue-200 text-[10px] font-semibold uppercase tracking-widest mb-1"
+          >
+            合计分钟
+          </p>
           <p class="text-3xl font-bold font-mono">{durationMins}</p>
           <p class="text-blue-200 text-xs">分钟</p>
         </div>
@@ -191,6 +229,5 @@
     <p class="text-center text-xs text-slate-400 mt-4">
       拖动转盘选择时长 · 或手动填写结束时间反算
     </p>
-
   </div>
 </div>
