@@ -42,7 +42,9 @@
 
   let min = new Date().getMinutes().toString();
   min = min.length < 2 ? "0" + min : min;
-  let initTime = new Date().getHours() + ":" + min;
+  let hr = new Date().getHours().toString();
+  hr = hr.length < 2 ? "0" + hr: hr;
+  let initTime = hr + ":" + min;
 
   let startTime = $state(initTime);
   let durationMins = $state(120);
