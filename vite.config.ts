@@ -14,13 +14,19 @@ if (!basePath) throw new Error("BASE_PATH environment variable is required but w
 
 export default defineConfig({
   base: basePath,
+  define: {
+    version: Date.now(),
+  },
   plugins: [
     svelte(),
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
       base: basePath,
-      includeAssets: ["icon.svg"],
+      includeAssets: ["icon.svg", "knob.png"],
+      devOptions: {
+        enabled: true
+      },
       manifest: {
         name: "差时计算器",
         short_name: "差时",

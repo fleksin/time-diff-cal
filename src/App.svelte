@@ -39,7 +39,9 @@
     return `${h} 小时 ${m} 分钟`;
   }
 
-  let initTime = new Date().getHours() + ':' + new Date().getMinutes();
+  let min = new Date().getMinutes().toString();
+  min = min.length < 2 ? '0' + min: min;
+  let initTime = new Date().getHours() + ':' + min;
 
   let startTime = $state(initTime);
   let durationMins = $state(120);
@@ -116,6 +118,9 @@
 
         <!-- Middle badge -->
         <div class="flex flex-col items-center pt-5 min-w-[52px]">
+         <!-- {#if crossesMidnight} -->
+            <p class="text-amber-500 text-[10px] mt-1 text-center {crossesMidnight? 'visible': 'invisible'}" >+1天</p>
+          <!-- {/if} -->
           <span class="text-slate-300 text-base leading-none">→</span>
           <div class="mt-1.5 bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">
             {fmtDuration(durationMins)}
@@ -135,9 +140,7 @@
               class="w-full bg-transparent text-slate-800 text-lg font-semibold px-3 py-2.5 outline-none"
             />
           </div>
-          {#if crossesMidnight}
-            <p class="text-amber-500 text-[10px] mt-1 text-center">跨越午夜</p>
-          {/if}
+         
         </div>
 
       </div>
