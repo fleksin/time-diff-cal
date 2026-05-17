@@ -182,7 +182,7 @@
     </div>
 
     <!-- Presets -->
-    <div
+    <!-- <div
       class="bg-white rounded-2xl shadow-lg shadow-blue-100/40 border border-slate-100 p-4 mb-4"
     >
       <div class="flex flex-wrap gap-2 justify-center">
@@ -198,7 +198,7 @@
           </button>
         {/each}
       </div>
-    </div>
+    </div> -->
 
     <!-- Result summary -->
     <div
