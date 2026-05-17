@@ -31,7 +31,7 @@ export default defineConfig({
         name: "差时计算器",
         short_name: "差时",
         description: "快速计算时间差，圆形转盘选择时长",
-        theme_color: "#3b82f6",
+        theme_color: "#f4f8fd",
         background_color: "#f0f4f8",
         display: "standalone",
         orientation: "portrait-primary",
